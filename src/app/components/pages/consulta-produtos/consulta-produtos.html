@@ -2,25 +2,53 @@
 <p>Listagem de produtos cadastrados no sistema:</p>
 <hr/>
 
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th>Nome do produto</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Total</th>
-            <th>Cadastrado em</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
+<!-- Exibir a tabela se houver registros de produto -->
+ @if (produtos().length == 0) {
+    <div class="alert alert-warning">
+        <strong>Nenhum produto foi encontrado.</strong>
+    </div>
+ }
+ @else {
+     <table class="table table-sm">
+         <thead>
+             <tr>
+                 <th>Nome do produto</th>
+                 <th>Preço</th>
+                 <th>Quantidade</th>
+                 <th>Total</th>
+                 <th>Cadastrado em</th>
+                 <th>Ações</th>
+             </tr>
+         </thead>
 
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="6">
-                Total de produtos: 0
-            </td>
-        </tr>
-    </tfoot>
-</table>
+         <tbody>
+            @for (item of produtos(); track item.id) {
+                <tr>
+                    <td>{{ item.nome | uppercase}}</td>
+                    <td>{{ item.preco | currency: "R$"}}</td>
+                    <td>{{ item.quantidade }}</td>
+                    <td>{{ item.preco * item.quantidade | currency: 'R$'}}</td>
+                    <td>{{ item.dataHoraCadastro | date: "dd/MM/yyyy HH:mm"}}</td>
+
+                    <td>
+                        <button class="btn btn-primary btn-sm me-1">
+                            Editar
+                        </button>
+
+                        <button class="btn btn-danger btn-sm me-1" (click)="excluirProduto(item)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            }
+         </tbody>
+
+         <tfoot>
+             <tr>
+                 <td colspan="6">
+                     Total de produtos: {{ produtos().length}}
+                 </td>
+             </tr>
+         </tfoot>
+     </table>
+ }
