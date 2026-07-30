@@ -1,1 +1,57 @@
-<p>edicao-produto works!</p>
+<h4>Edição de produtos</h4>
+<p>Preencha o formulário abaixo para alterar os dados do produto:</p>
+<hr />
+
+@if(mensagem()) {
+    <div class="alert alert-info">
+        <strong>{{ mensagem() }}</strong>
+    </div>
+}
+
+<form [formGroup]="formEdicao" (ngSubmit)="atualizarProduto()">
+
+    <div class="mb-3">
+        <label>Nome do produto:</label>
+        <input type="text" class="form-control" placeholder="Digite o nome aqui"
+            formControlName="nome" />
+
+        @if(formEdicao.get('nome')?.touched && formEdicao.get('nome')?.invalid) {
+            <span class="text-danger">
+                O nome do produto é obrigatório e deve ter de 6 a 150 caracteres.
+            </span>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <label>Preço:</label>
+        <input type="text" class="form-control" placeholder="Digite o preço aqui"
+            formControlName="preco" />
+
+        @if(formEdicao.get('preco')?.touched && formEdicao.get('preco')?.invalid) {
+            <span class="text-danger">
+                O preço do produto é obrigatório e deve estar entre '0.01' e '99999.99'.
+            </span>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <label>Quantidade:</label>
+        <input type="number" class="form-control" placeholder="Digite a quantidade aqui"
+            formControlName="quantidade" />
+
+        @if(formEdicao.get('quantidade')?.touched && formEdicao.get('quantidade')?.invalid) {
+            <span class="text-danger">
+                A quantidade do produto é obrigatória e deve estar entre '0' e '9999'.
+            </span>
+        }
+
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" value="Salvar alterações" class="btn btn-primary"
+            [disabled]="formEdicao.invalid" />
+    </div>
+
+</form>

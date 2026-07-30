@@ -1,1 +1,51 @@
-<p>dashboard works!</p>
+<h4>Dashboard</h4>
+<p>Seja bem vindo ao sistema de controle de produtos.</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h6 class="text-muted">Total de produtos</h6>
+
+                <h2 class="fw-bold text-primary mb-0">
+                    {{ resumoProduto().totalProdutos || 0 }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h6 class="text-muted">Unidades em estoque</h6>
+
+                <h2 class="fw-bold text-success mb-0">
+                    {{ resumoProduto().totalUnidadeEstoque || 0 }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h6 class="text-muted">Valor total do estoque</h6>
+
+                <h2 class="fw-bold text-info mb-0">
+                    {{ resumoProduto().valorTotalEstoque | currency:'BRL' }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h6 class="text-muted">Preço médio dos produtos</h6>
+
+                <h2 class="fw-bold text-warning mb-0">
+                    {{ resumoProduto().precoMedio | currency:'BRL' }}
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div [chart]="grafico()"></div>
+    </div>
+</div>

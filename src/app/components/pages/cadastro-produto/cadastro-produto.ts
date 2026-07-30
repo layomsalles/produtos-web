@@ -33,7 +33,7 @@ export class CadastroProduto {
     ]),
 
     quantidade: new FormControl('', [
-      Validators.required, Validators.min(1), Validators.max(9999)
+      Validators.required, Validators.min(0), Validators.max(9999)
     ])
   })
 
